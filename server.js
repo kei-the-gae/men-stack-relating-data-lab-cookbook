@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
+const isSignedIn = require('./middleware/is-signed-in');
+const passUserToView = require('./middleware/pass-user-to-view');
 
 const authController = require('./controllers/auth');
 const foodsController = require('./controllers/foods')
@@ -33,7 +35,9 @@ app.get('/', (req, res) => {
   res.render('index.ejs');
 });
 
+app.use(passUserToView);
 app.use('/auth', authController);
+app.use(isSignedIn);
 app.use('/users/:userId/foods', foodsController);
 
 app.listen(port, () => {
