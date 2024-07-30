@@ -7,7 +7,8 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
 
-const authController = require('./controllers/auth.js');
+const authController = require('./controllers/auth');
+const foodsController = require('./controllers/foods')
 
 const port = process.env.PORT ? process.env.PORT : '3000';
 
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authController);
+app.use('/users/:userId/foods', foodsController);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
