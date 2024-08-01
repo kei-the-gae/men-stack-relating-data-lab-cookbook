@@ -10,7 +10,8 @@ const isSignedIn = require('./middleware/is-signed-in');
 const passUserToView = require('./middleware/pass-user-to-view');
 
 const authController = require('./controllers/auth');
-const foodsController = require('./controllers/foods')
+const foodsController = require('./controllers/foods');
+const usersController = require('./controllers/users');
 
 const port = process.env.PORT ? process.env.PORT : '3000';
 
@@ -41,6 +42,7 @@ app.use(passUserToView);
 app.use('/auth', authController);
 app.use(isSignedIn);
 app.use('/users/:userId/foods', foodsController);
+app.use('/users', usersController);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
