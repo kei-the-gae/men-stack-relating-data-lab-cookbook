@@ -11,11 +11,15 @@
     <%- include('../partials/_navbar') %>
     <h1>Welcome to my Pantry</h1>
     <a href="/users/<%= user._id %>/foods/new">Add New Item</a>
+    <% if (foods.length) { %>
     <ul>
         <% foods.forEach(food => { %>
         <li><%= food.name %></li>
         <% }); %>
     </ul>
+    <% } else { %>
+    <p>There are no items in this pantry.</p>
+    <% } %>
 </body>
 
 </html>
