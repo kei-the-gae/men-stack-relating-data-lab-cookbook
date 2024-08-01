@@ -56,4 +56,16 @@ router.get('/:foodId/edit', async (req, res) => {
     };
 });
 
+router.put('/:foodId', async (req, res) => {
+    try {
+        const currentUser = await User.findById(req.session.user._id);
+        currentUser.pantry.id(req.params.foodId).set(req.body);
+        await currentUser.save();
+        res.redirect(`/users/${currentUser._id}/foods`)
+    } catch (err) {
+        console.log(err);
+        res.redirect('/');
+    };
+});
+
 module.exports = router;
