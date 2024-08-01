@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/new', async (req, res) => {
-    res.render('foods/new');
+    res.render('foods/new.ejs');
 });
 
 module.exports = router;
