@@ -5,7 +5,10 @@ const User = require('../models/user');
 
 router.get('/', async (req, res) => {
     try {
-        res.send('this is the community page');
+        const allUsers = await User.find();
+        res.render('users/index.ejs', {
+            users: allUsers,
+        });
     } catch (err) {
         console.log(err);
         res.redirect('/');
